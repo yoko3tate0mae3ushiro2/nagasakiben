@@ -1,0 +1,12 @@
+{% extends 'nagasakiben/base.html' %}
+
+{% block main %}
+    <main>
+        <h1>{% block title %}新規・修正{% endblock %}</h1>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ dictionaryform.as_p }}
+            <button type="submit">保存する</button>
+        </form>
+    </main>
+{% endblock %}

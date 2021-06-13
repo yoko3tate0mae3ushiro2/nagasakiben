@@ -1,0 +1,16 @@
+{% extends 'nagasakiben/base.html' %}
+
+{% block main %}
+<main>
+    <h2>「{{ searched }}」の検索結果</h2>
+    {% if searched %}
+      <p>下記のページが見つかりました。</p>
+      {% for dictionary in searchresults %}
+      <a href="{% url 'dictionary_detail' dictionary.pronunciation %}">{{ dictionary.word }} ( {{ dictionary.pronunciation|linebreaksbr }} )</a>
+      <p>{{ dictionary.meaning|linebreaksbr }}</p>
+      {% endfor %}    
+    {% else %}
+      <p>何も検索されていません。</p>
+    {% endif %}
+</main>
+{% endblock %}

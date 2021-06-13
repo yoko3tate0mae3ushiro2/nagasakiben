@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if request.get_full_path == "/" %}
+    <title>ながさきべん</title>
+    <meta name=”description” content=”ながさきべんを楽しく学習するサイトです。”>
+    {% else %}
+    <title> {{ dictionary.word }} | ながさきべん</title>
+    <meta name=description content= {{ dictionary.meaning|striptags|truncatewords:100 }} >
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">ながさきべんアプリ開発日誌</a></h1>   
+    </header>
+
+    {% block article %}
+    {% endblock %}
+
+    <aside class="post_new">
+      <a href="{% url 'post_new' %}" class="top-menu">新しい単語を登録する</a>
+    </aside>
+
+    <footer>
+      <a href="{% url 'about' %}">このサイトについて</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if request.get_full_path == "/" %}
+    <title>ながさきべん</title>
+    <meta name=”description” content=”ながさきべんを楽しく学習するサイトです。”>
+    {% else %}
+    <title>{% block title %}{% endblock %} | ながさきべん</title>
+    <meta name=description content= {{ dictionary.meaning|striptags|truncatewords:100 }} >
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <header>
+      <div class="site-title"><a href="/">ながさきべん</a></div>   
+      <nav>
+        <form method="POST" action="{% url 'search' %}"  class="search-form">
+          {% csrf_token %}
+          <input type="search" class="search-box" placeholder="ながさきべんを検索する" name="searched">
+          <button type="submit" class="search-btn">検索</button>
+        </form>
+      </nav>
+    </header>
+
+    {% block main %}
+    {% endblock %}
+    <aside class="dictionary_new">
+      <a href="{% url 'dictionary_new' %}" class="top-menu">新しい単語を登録する</a>
+    </aside>
+    <footer>
+      <a href="{% url 'about' %}">このサイトについて</a>
+      <a href="{% url 'post_list' %}">開発日誌</a>
+      <a href="{% url 'dictionary_export' %}">データダウンロード</a>
+    </footer>
+  </body>
+</html>

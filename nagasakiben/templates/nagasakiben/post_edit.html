@@ -1,0 +1,13 @@
+{% extends 'nagasakiben/post.html' %}
+
+{% block article %}
+    <main>
+        <h2>新規・修正</h2>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ postform.media }}
+            {{ postform.as_p }}
+            <button type="submit">保存する</button>
+        </form>
+    </main>
+{% endblock %}

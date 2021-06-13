@@ -1,0 +1,11 @@
+{% extends 'nagasakiben/base.html' %}
+
+{% block main %}
+  <main>
+    <h1>{% block title %}コメント{% endblock %}</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ feedback_form.as_p }}
+        <button type="submit">送信する</button>
+    </form>
+  </main>
+{% endblock %}

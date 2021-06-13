@@ -1,0 +1,43 @@
+{% extends 'nagasakiben/base.html' %}
+
+{% block main %}
+<main>
+    <h1>{% block title %}このサイトについて{% endblock %}</h1>
+    <p>{% block description %}『ながさきべん』は、フロンティアアカデミーの「AIアプリ制作科」(期間：6ヶ月)の卒業制作として作られました。{% endblock %}</p>
+    <p>このサイトを作るために使用されたツールは、下記のとおりです。</p>
+    <ul>
+      <li>Python (プログラミング言語)</li>
+      <li>Django（Webアプリケーションフレームワーク）</li>
+      <li>SQLite（データベース）</li>
+      <li>Git（バージョン管理システム）</li>
+      <li>GitHub（ソースコードホスティングサービス）</li>
+      <li>PythonAnywhere（Python用のクラウドサーバー）</li>
+      <li>Google Material Icons（アイコンフォント）</li>
+      <li>HTML5（ウェブ言語）</li>
+      <li>CSS3（スタイルシート）</li>
+    </ul>
+
+    <h3>「AIアプリ制作科」のその他のカリキュラム</h3>
+    <p>ウェブ制作未経験者向けのコースで、授業は、HTML/CSSからスタートします。</p>
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>jQuery</li>
+      <li>ウェブ制作検定対策</li>
+    </ul>
+    <p>次々に押し寄せてくる新しい知識に加え、jQueryのわけがわからぬ括弧の多さにめげそうになりました。</p>
+    <p>jQueryをなんとか凌ぎきったら、プログラミングの学習が始まります。</p>
+    <ul>
+      <li>Python</li>
+      <li>Pythonを使った機械学習</li>
+      <li>Pythonを使ったスクレイピング</li>
+      <li>PythonをつかったAIアプリ</li>
+    </ul>
+    <p>授業では、AIプログラムを作って、それをbottleというライブラリでウェブ表示しました。</p>
+    <p>これから卒業までに、php、ワードプレスなどを学習予定です。</p>
+    <p>この他、エクセルやフォトショップ検定の補講なども行われており、学びたい人にはいろいろな学習機会があります。</p>
+    <p>興味が湧いた方は、長崎のハロワまで。親切な職員さん達がいろいろ相談に乗ってくれます。</p>
+
+
+</main>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'nagasakiben/base.html' %}
+
+{% block main %}
+<main>
+  <h1>{% block title %}単語一覧、ダウンロード{% endblock %}</h1>
+  <a class="export" href="{% url 'dictionary_export_csv_shiftjis' %}">CSV(SHIFT-JIS形式)をダウンロード</a>
+  <a class="export" href="{% url 'dictionary_export_csv' %}">CSV(UTF-8形式)をダウンロード</a>
+  
+  <h2>ながさきべん、一覧</h2>
+  <table>
+    <thaed>
+      <tr>
+        <th>単語</th>
+        <th>アルファベット読み</th>
+        <th>意味</th>
+        <th>用例</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dictionary in dictionaries %}
+      <tr>
+        <td>{{ dictionary.word }}</td>
+        <td>{{ dictionary.pronunciation }}</td>
+        <td>{{ dictionary.meaning }}</td>
+        <td>{{ dictionary.usage }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>
+{% endblock %}
