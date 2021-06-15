@@ -3,11 +3,13 @@
 {% block main %}
   <main>
     <h1>{% block title %}さくいん{% endblock %}</h1>
-  {% for dictionary in dictionaries %}  
-    <h2><a href="{% url 'dictionary_detail' dictionary.pronunciation %}">{{ dictionary.word }}</a></h2>
-    <p>発音：{{ dictionary.pronunciation|linebreaksbr }}</p>
-    <a href="{% url 'dictionary_detail' pronunciation=dictionary.pronunciation %}">コメント: {{ dictionary.feedbacks.count }}</a>
-    <hr class="main-list-break">
+  {% for dictionary in dictionaries %}
+    {% if dictionary.approved_dictionary %}
+      <h2><a href="{% url 'dictionary_detail' dictionary.pronunciation %}">{{ dictionary.word }}</a></h2>
+      <p>発音：{{ dictionary.pronunciation|linebreaksbr }}</p>
+      <a href="{% url 'dictionary_detail' pronunciation=dictionary.pronunciation %}">コメント: {{ dictionary.feedbacks.count }}</a>
+      <hr class="main-list-break">
+    {% endif %}
   {% endfor %}
   </main>
 {% endblock %}

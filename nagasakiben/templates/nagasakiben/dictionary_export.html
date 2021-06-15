@@ -5,6 +5,7 @@
   <h1>{% block title %}単語一覧、ダウンロード{% endblock %}</h1>
   <a class="export" href="{% url 'dictionary_export_csv_shiftjis' %}">CSV(SHIFT-JIS形式)をダウンロード</a>
   <a class="export" href="{% url 'dictionary_export_csv' %}">CSV(UTF-8形式)をダウンロード</a>
+  <small>※excelファイルで開きたい方はSHIFT-JIS形式を選んでください。</small>
   
   <h2>ながさきべん、一覧</h2>
   <table>
@@ -18,12 +19,14 @@
     </thead>
     <tbody>
       {% for dictionary in dictionaries %}
-      <tr>
-        <td>{{ dictionary.word }}</td>
-        <td>{{ dictionary.pronunciation }}</td>
-        <td>{{ dictionary.meaning }}</td>
-        <td>{{ dictionary.usage }}</td>
-      </tr>
+        {% if dictionary.approved_dictionary %}
+        <tr>
+          <td>{{ dictionary.word }}</td>
+          <td>{{ dictionary.pronunciation }}</td>
+          <td>{{ dictionary.meaning }}</td>
+          <td>{{ dictionary.usage }}</td>
+        </tr>
+        {% endif %}
       {% endfor %}
     </tbody>
   </table>

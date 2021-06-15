@@ -3,7 +3,7 @@
 {% block article %}
   <main>
   {% for post in posts %}  
-    <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+    <h1><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h1>
     <p>投稿日：{{ post.published_date }}</p>
     <p>{{ post.content|safe|truncatewords:100 }}</p>
   {% endfor %}

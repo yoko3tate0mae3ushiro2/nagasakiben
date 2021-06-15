@@ -1,37 +1,47 @@
 {% extends 'nagasakiben/base.html' %}
 
 {% block main %}
-  <main>
-    <h1>{% block title %}{{ dictionary.word }}{% endblock %}</h1>
-    <small>読み方：{{ dictionary.pronunciation|linebreaksbr }}</small>
-    <dl>
-      <dt>意味：</dt>
-      <dd>{% block description %}{{ dictionary.meaning|linebreaksbr }}{% endblock %}</dd>
-      <dt>用例：</dt>
-      <dd>{{ dictionary.usage|linebreaksbr }}</dd>
-      <dt>登録日:</dt>
-      <dd>
-      {% if dictionary.published_date %}
-        {{ dictionary.published_date }}
-      {% endif %}</dd>
-    </dl>
-    
-    <hr>
-    <h2>コメント・フィードバック</h2>
-    {% for feedback in dictionary.feedbacks.all %}
-    <div class="comment">        
-        <p><strong>{{ feedback.written_by }}</strong>さんからのコメント</p>
-        <p>{{ feedback.feedback_content|linebreaks }}</p>
-        <p>{{ feedback.created_date }}</p>
-    </div>
-    {% empty %}
-    <p>この単語に対するコメントはまだありません</p>
-    {% endfor %}
-  </main>
-  <aside class="new-comment">
-    <a class="btn btn-default" href="{% url 'dictionary_feedback' pronunciation=dictionary.pronunciation %}">この単語についてコメントを書く</a>
-  </aside>
-  <aside class="edit-post" >
-    <a href="{% url 'dictionary_edit' pronunciation=dictionary.pronunciation %}">この単語を修正する</a>
-  </aside>
+  {% if dictionary.approved_dictionary %}
+    <main>
+      <h1>{% block title %}{{ dictionary.word }}{% endblock %}</h1>
+      <small>読み方：{{ dictionary.pronunciation|linebreaksbr }}</small>
+      <dl>
+        <dt>意味：</dt>
+        <dd>{% block description %}{{ dictionary.meaning|linebreaksbr }}{% endblock %}</dd>
+        <dt>用例：</dt>
+        <dd>{{ dictionary.usage|linebreaksbr }}</dd>
+        <dt>登録日:</dt>
+        <dd>
+        {% if dictionary.published_date %}
+          {{ dictionary.published_date }}
+        {% endif %}</dd>
+      </dl>
+      
+      <hr>
+      
+      <h2>コメント・フィードバック</h2>
+      {% for feedback in dictionary.feedbacks.all %}
+        {% if feedback.approved_feedback %}
+          <div class="comment">
+            <p><strong>{{ feedback.written_by }}</strong>さんからのコメント</p>
+            {{ feedback.feedback_content|linebreaks }}
+            <div class="date">{{ feedback.published_date }}</div>
+          </div>
+          <hr class="comment-separator">
+        {% endif %}
+      {% empty %}
+        <p>この単語に対するコメントはまだありません</p>
+      {% endfor %}
+    </main>
+    <aside class="new-comment">
+      <a class="btn btn-default" href="{% url 'dictionary_feedback' pronunciation=dictionary.pronunciation %}">この単語についてコメントを書く</a>
+    </aside>
+    <aside class="edit-post" >
+      <a href="{% url 'dictionary_edit' pronunciation=dictionary.pronunciation %}">この単語を修正する</a>
+    </aside>
+  {% elif not dictionary.approved_dictionary %}
+    <main>
+      <p>この単語は現在承認されておりません。</p>
+    </main>
+  {% endif %}
 {% endblock %}

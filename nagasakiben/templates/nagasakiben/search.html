@@ -2,12 +2,19 @@
 
 {% block main %}
 <main>
-    <h2>「{{ searched }}」の検索結果</h2>
+    <h1>{% block title %}「{{ searched }}」の検索結果{% endblock %}</h1>
     {% if searched %}
-      <p>下記のページが見つかりました。</p>
+      
       {% for dictionary in searchresults %}
-      <a href="{% url 'dictionary_detail' dictionary.pronunciation %}">{{ dictionary.word }} ( {{ dictionary.pronunciation|linebreaksbr }} )</a>
-      <p>{{ dictionary.meaning|linebreaksbr }}</p>
+        {% if dictionary.approved_dictionary %}
+          <p>下記のページが見つかりました。</p>
+          <h2><a href="{% url 'dictionary_detail' dictionary.pronunciation %}">{{ dictionary.word }} ( {{ dictionary.pronunciation|linebreaksbr }} )</a></h2>
+          <p>意味：{{ dictionary.meaning|linebreaksbr }}</p>
+        {% elif not dictionary.approved_dictionary %}
+          <p>何も見つかりませんでした。</p>
+        {% endif %}
+      {% empty %}
+        <p>何も見つかりませんでした。</p>
       {% endfor %}    
     {% else %}
       <p>何も検索されていません。</p>

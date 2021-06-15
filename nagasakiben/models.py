@@ -13,6 +13,7 @@ class Dictionary(models.Model):
     usage = models.TextField(verbose_name="用例")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="作成日")
     published_date = models.DateTimeField(blank=True, null=True, verbose_name="登録日")
+    approved_dictionary = models.BooleanField(default=True)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -20,6 +21,11 @@ class Dictionary(models.Model):
 
     def __str__(self):
         return self.word
+
+    def approve(self):
+        self.approved_dictionary = True
+        self.save()
+
 
 class Feedback(models.Model):
     dictionary = models.ForeignKey('nagasakiben.Dictionary', on_delete=models.CASCADE, related_name='feedbacks', verbose_name="コメント")
@@ -29,7 +35,7 @@ class Feedback(models.Model):
     approved_feedback = models.BooleanField(default=True)
 
     def approve(self):
-        self.approved_comment = True
+        self.approved_feedback = True
         self.save()
 
     def __str__(self):

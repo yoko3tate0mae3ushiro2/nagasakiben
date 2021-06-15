@@ -1,29 +1,32 @@
 {% extends 'nagasakiben/post.html' %}
 
+
 {% block article %}
   <main>
-    <h1>{% block title %}{{ post.title }}{% endblock %}</h1>
+    <h1>{% block meta %}{{ post.title }}{% endblock %}</h1>
     <p>登録日:</p>
     {% if post.published_date %}
       {{ post.published_date }}
     {% endif %}
     <p>{{ post.content|safe }}</p>
 
+    <hr>
 
+    <h2>コメント</h2>  
     {% for comment in post.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.published_date }}</div>
-        <strong>{{ comment.written_by }}</strong>
-        <p>{{ comment.content|linebreaks }}</p>
-    </div>
+      {% if user.is_authenticated or comment.approved_comment %}
+        <div class="comment">
+          <p><strong>{{ comment.written_by }}</strong>さんからのコメント</p>
+          {{ comment.content|linebreaks }}
+          <div class="date">{{ comment.published_date }}</div>
+        </div>
+        <hr class="comment-separator">
+      {% endif %}
     {% empty %}
-    <p>この単語に対するコメントはまだありません</p>
+      <p>まだコメントはありません</p>
     {% endfor %}
   </main>
-  <div class="new-comment">
-    <a ref="{% url 'post_comment' slug=post.slug %}">この記事についてコメントを書く</a>
-  </div>
-  <aside>
-    <a href="{% url 'post_edit' slug=post.slug %}">この記事を修正する</a>
+  <aside class="new-comment">
+    <a href="{% url 'post_comment' slug=post.slug %}">この記事についてコメントを書く</a>
   </aside>
 {% endblock %}

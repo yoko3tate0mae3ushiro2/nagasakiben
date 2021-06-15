@@ -1,4 +1,5 @@
 body {
+  font-family: 'RocknRoll One', sans-serif;
   background: #f9f9f9;
   color: #333333;
   margin: 0;
@@ -50,6 +51,22 @@ hr {
   border: 0;
   border-bottom: 1px dashed #59b9c6;
 }
+
+hr:last-child {
+  border: none;
+  border-bottom: none;
+}
+
+hr.comment-separator {
+  border: 0;
+  border-bottom: 1px dashed #f8b500;
+}
+
+hr:last-child.comment-separator {
+  border: none;
+  border-bottom: none;
+}
+
 
 .export {
   display: block;
@@ -164,7 +181,3 @@ main a:avtive {
   background: blue;
   border-radius: 10px;
 }
-
-
-
-

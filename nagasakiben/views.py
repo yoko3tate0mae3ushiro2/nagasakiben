@@ -88,7 +88,7 @@ class dictionary_export_csv_shiftjis(View):
 
 
 def dictionary_export(request):
-    dictionaries = Dictionary.objects.all()
+    dictionaries = Dictionary.objects.all().order_by('word')
     return render(request, 'nagasakiben/dictionary_export.html', {'dictionaries': dictionaries})
 
 def about(request):

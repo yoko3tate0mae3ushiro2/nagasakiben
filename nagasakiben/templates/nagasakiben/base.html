@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
     {% if request.get_full_path == "/" %}
     <title>ながさきべん</title>
     <meta name=”description” content=”ながさきべんを楽しく学習するサイトです。”>
@@ -28,12 +30,13 @@
 
     {% block main %}
     {% endblock %}
+    
     <aside class="dictionary_new">
       <a href="{% url 'dictionary_new' %}" class="top-menu">新しい単語を登録する</a>
     </aside>
     <footer>
       <a href="{% url 'about' %}">このサイトについて</a>
-      <a href="{% url 'post_list' %}">開発日誌</a>
+      <a href="{% url 'post_list' %}">　　　　　開発日誌　　　　　</a>
       <a href="{% url 'dictionary_export' %}">データダウンロード</a>
     </footer>
   </body>
